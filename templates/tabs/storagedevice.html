@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+   <html>
+  <head>
+   <title>Tech Jungle</title>
+   <link rel='shortcut icon' href = "https://user-images.githubusercontent.com/76495035/124677613-77185780-de86-11eb-8bbc-982a6b64214e.png" type = "image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+      {% load bootstrap4 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+  </head>
+  <body>
+<header>
+  <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg {% endif %} navbar-light bg-light">
+  <a class="navbar-brand" href="/">Tech Jungle</a>
+    <form class="form-inline">
+      <a class="nav-link mr-2 ml-2 text-dark" href="/buy/">Buy</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/sell/">Sell</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/saveditems/">Saved Items</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/profile/">Profile</a>
+      <span class="mr-4">{{request.user.get_full_name|title}}</span>
+      <a href="/sign-out">Sign Out</a>
+    </form>
+</nav></header><br>
+        <center>
+        <nav style="width:99%;">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a href="/buy/" class="nav-link {% if request.path == '/buy/' %}active{% endif %}">All</a>
+            <a href="/buy/computers/" class="nav-link {% if request.path == '/buy/computers/' %}active{% endif %}">Computers</a>
+            <a href="/buy/cameras/" class="nav-link {% if request.path == '/buy/cameras/' %}active{% endif %}">Camera</a>
+            <a href="/buy/tablets/" class="nav-link {% if request.path == '/buy/tablets/' %}active{% endif %}">Tablets</a>
+            <a href="/buy/watches/" class="nav-link {% if request.path == '/buy/watches/' %}active{% endif %}">Watches</a>
+            <a href="/buy/phones/" class="nav-link {% if request.path == '/buy/phones/' %}active{% endif %}">Phones</a>
+            <a href="/buy/e-readers/" class="nav-link {% if request.path == '/buy/e-readers/' %}active{% endif %}">e-readers</a>
+            <a href="/buy/storagedevices/" class="nav-link {% if request.path == '/buy/storagedevices/' %}active{% endif %}">Storage Devices</a>
+            <a href="/buy/projectors/" class="nav-link {% if request.path == '/buy/projectors/' %}active{% endif %}">Projectors</a>
+            <a href="/buy/speakers/" class="nav-link {% if request.path == '/buy/speakers/' %}active{% endif %}">Speakers</a>
+            <a href="/buy/headphones-earbuds/" class="nav-link {% if request.path == '/buy/headphones-earbuds/' %}active{% endif %}">Headphones/Earbuds</a>
+            <a href="/buy/printers/" class="nav-link {% if request.path == '/buy/printers/' %}active{% endif %}">Printer</a>
+            <a href="/buy/microphones/" class="nav-link {% if request.path == '/buy/mice/' %}active{% endif %}">Microphones</a>
+            <a href="/buy/mice/" class="nav-link {% if request.path == '/buy/mice/' %}active{% endif %}">Mice</a>
+            <a href="/buy/keyboards/" class="nav-link {% if request.path == '/buy/keyboards/' %}active{% endif %}">Keyboards</a>
+            <a href="/buy/appliances/" class="nav-link {% if request.path == '/buy/appliances/' %}active{% endif %}">Appliances</a>
+          </div>
+        </nav></center><br>
+
+             <form class="d-flex" method="GET" value="{{request.GET.searchforelectronics}}">
+                <input class="form-control ml-5" type="search" name="searchforelectronics" value="{{request.GET.searchforelectronics}}" id="searchforelectronics" style="width:600px" placeholder="Search for Electronics" aria-label="Search">
+                <button class="btn btn-outline-success bi-search" type="submit" name="submit" value="Search"></button>
+             </form>
+
+            <br>
+            {% if searchbutton == 'Search' and request.GET.searchforelectronics != '' or request.GET.searchforelectronics is not None %}
+            <h4 style="margin-left:50px">Results for <b>{{ request.GET.searchforelectronics }}</b></h4>
+            <br>
+            {% if shipsearch or pickshipsearch or pickupsearch %}
+            {% for shipsearch in shipsearch %}
+                 <div class="card mb-3 mr-5 ml-5">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <center><img src="{{shipsearch.photo.url}}" class="img-fluid rounded-start"></center>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{shipsearch.name_of_product}}</h5>
+                        <h5 style="font-size:15px;" class="card-text">{{shipsearch.category}}</h5>
+                        <p style="font-size:14px;" class="card-text">{{shipsearch.description}}</p>
+                        <h5 style="font-size:15px;" class="card-text">{{shipsearch.condition}}</h5>
+                        <p style="font-size:15px;" class="card-text">${{shipsearch.price}} USD</p>
+                        <p style="font-size:15px;" class="card-text">{{shipsearch.pickuporship}}</p>
+                        <a class="btn btn-primary" id={{shipsearch.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                        <a class="btn btn-primary" href="{% url 'saveitem' shipsearch.name_of_product %}">Save</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><br>
+            {% endfor %}
+            {% for pickshipsearch in pickshipsearch %}
+                 <div class="card mb-3 mr-5 ml-5">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <center><img src="{{pickshipsearch.photo.url}}" class="img-fluid rounded-start"></center>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{pickshipsearch.name_of_product}}</h5>
+                        <h5 style="font-size:15px;" class="card-text">{{pickshipsearch.category}}</h5>
+                        <p style="font-size:14px;" class="card-text">{{pickshipsearch.description}}</p>
+                        <h5 style="font-size:15px;" class="card-text">{{pickshipsearch.condition}}</h5>
+                        <p style="font-size:15px;" class="card-text">${{pickshipsearch.price}} USD</p>
+                        <p style="font-size:15px;" class="card-text">{{pickshipsearch.pickuporship}}</p>
+                        <p style="font-size:15px;" class="card-text">Pickup Area: {{pickshipsearch.city}}</p>
+                        <a class="btn btn-primary" id={{pickshipsearch.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                        <a class="btn btn-primary" href="{% url 'saveitem' pickshipsearch.name_of_product %}">Save</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><br>
+            {% endfor %}
+            {% for pickupsearch in pickupsearch %}
+                 <div class="card mb-3 mr-5 ml-5">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <center><img src="{{pickupsearch.photo.url}}" class="img-fluid rounded-start"></center>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{pickupsearch.name_of_product}}</h5>
+                        <h5 style="font-size:15px;" class="card-text">{{pickupsearch.category}}</h5>
+                        <p style="font-size:14px;" class="card-text">{{pickupsearch.description}}</p>
+                        <h5 style="font-size:15px;" class="card-text">{{pickupsearch.condition}}</h5>
+                        <p style="font-size:15px;" class="card-text">${{pickupsearch.price}} USD</p>
+                        <p style="font-size:15px;" class="card-text">{{pickupsearch.pickuporship}}</p>
+                        <p style="font-size:15px;" class="card-text">Pickup Area: {{pickupsearch.city}}</p>
+                        <a class="btn btn-primary" id={{pickupsearch.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                        <a class="btn btn-primary" href="{% url 'saveitem' pickupsearch.name_of_product %}">Save</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><br>
+            {% endfor %}
+            {% else %}
+                <h4 style="margin-left:50px">No results found for <b>{{ request.GET.searchforelectronics }}</b></h4>
+                <button style="margin-left:50px" class="btn btn-primary" onclick="reload()">Return</button><br><br>
+            {% endif %}
+
+        {% else %}
+        {% for ship in ship %}
+        <div class="card mb-3 mr-5 ml-5">
+          <div class="row g-0">
+            <div class="col-md-3">
+              <center><img src="{{ship.photo.url}}" class="img-fluid rounded-start"></center>
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title">{{ship.name_of_product}}</h5>
+                <h5 style="font-size:15px;" class="card-text">{{ship.category}}</h5>
+                <p style="font-size:14px;" class="card-text">{{ship.description}}</p>
+                <h5 style="font-size:15px;" class="card-text">{{ship.condition}}</h5>
+                <p style="font-size:15px;" class="card-text">${{ship.price}} USD</p>
+                <p style="font-size:15px;" class="card-text">{{ship.pickuporship}}</p>
+                <a class="btn btn-primary" id={{ship.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                <a class="btn btn-primary" href="{% url 'saveitem' ship.name_of_product %}">Save</a>
+              </div>
+            </div>
+          </div>
+        </div><br>
+        {% endfor %}
+        {% for pickship in pickship %}
+        <div class="card mb-3 mr-5 ml-5">
+          <div class="row g-0">
+            <div class="col-md-3">
+              <center><img src="{{pickship.photo.url}}" class="img-fluid rounded-start"></center>
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title">{{pickship.name_of_product}}</h5>
+                <h5 style="font-size:15px;" class="card-text">{{pickship.category}}</h5>
+                <p style="font-size:14px;" class="card-text">{{pickship.description}}</p>
+                <h5 style="font-size:15px;" class="card-text">{{pickship.condition}}</h5>
+                <p style="font-size:15px;" class="card-text">${{pickship.price}} USD</p>
+                <p style="font-size:15px;" class="card-text">{{pickship.pickuporship}}</p>
+                <p style="font-size:15px;" class="card-text">Pickup Area: {{pickship.city}}</p>
+                <a class="btn btn-primary" id={{pickship.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                <a class="btn btn-primary" href="{% url 'saveitem' pickship.name_of_product %}">Save</a>
+              </div>
+            </div>
+          </div>
+        </div><br>
+        {% endfor %}
+        {% for pickup in pickup %}
+        <div class="card mb-3 mr-5 ml-5">
+          <div class="row g-0">
+            <div class="col-md-3">
+              <center><img src="{{pickup.photo.url}}" class="img-fluid rounded-start"></center>
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title">{{pickup.name_of_product}}</h5>
+                <h5 style="font-size:15px;" class="card-text">{{pickup.category}}</h5>
+                <p style="font-size:14px;" class="card-text">{{pickup.description}}</p>
+                <h5 style="font-size:15px;" class="card-text">{{pickup.condition}}</h5>
+                <p style="font-size:15px;" class="card-text">${{pickup.price}} USD</p>
+                <p style="font-size:15px;" class="card-text">{{pickup.pickuporship}}</p>
+                <p style="font-size:15px;" class="card-text">Pickup Area: {{pickup.city}}</p>
+                <a class="btn btn-primary" id={{pickup.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                <a class="btn btn-primary" href="{% url 'saveitem' pickup.name_of_product %}">Save</a>
+              </div>
+            </div>
+          </div>
+        </div><br>
+        {% endfor %}
+        {% endif %}
+
+  <footer class="text-center mt-5 mb-5">
+    &copy; 2021, Tech Jungle
+  </footer>
+
+  <script>
+      function reload() {
+        window.location.replace('/buy/storagedevices/');
+      }
+      function email(clicked_id) {
+        var emailcontact = clicked_id;
+        localStorage.setItem("emailcontact", emailcontact);
+      }
+  </script>
+
+  </body>
+ </html>

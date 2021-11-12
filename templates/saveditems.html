@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+   <html>
+  <head>
+   <title>Tech Jungle</title>
+   <link rel='shortcut icon' href = "https://user-images.githubusercontent.com/76495035/124677613-77185780-de86-11eb-8bbc-982a6b64214e.png" type = "image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+      {% load bootstrap4 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+  </head>
+  <body>
+<header>
+  <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg {% endif %} navbar-light bg-light">
+  <a class="navbar-brand" href="/">Tech Jungle</a>
+    <form class="form-inline">
+      <a class="nav-link mr-2 ml-2 text-dark" href="/buy/">Buy</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/sell/">Sell</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/saveditems/">Saved Items</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/profile/">Profile</a>
+      <span class="mr-4">{{request.user.get_full_name|title}}</span>
+      <a href="/sign-out">Sign Out</a>
+    </form>
+</nav></header><br><br>
+
+              {% for saved_posts in saved_posts %}
+              <div class="col-lg-6" style="margin-left:50px">
+                 <div class="card mb-3 mr-5 ml-5">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <center><img src="{{saved_posts.photo.url}}" class="img-fluid rounded-start"></center>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{saved_posts.name_of_product}}</h5>
+                        <h5 style="font-size:15px;" class="card-text">{{saved_posts.category}}</h5>
+                        <p style="font-size:14px;" class="card-text">{{saved_posts.description}}</p>
+                        <h5 style="font-size:15px;" class="card-text">{{saved_posts.condition}}</h5>
+                        <p style="font-size:15px;" class="card-text">${{saved_posts.price}} USD</p>
+                        <p style="font-size:15px;" class="card-text">{{saved_posts.pickuporship}}</p>
+                        <a class="btn btn-primary" id={{shipsearch.email}} onclick="email(this.id)" href="/contactseller/">Contact Seller</a>
+                        <a class="btn btn-danger" href="{% url 'removeitem' saved_posts.name_of_product %}">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><br>
+            {% endfor %}
+
+  <footer class="text-center mt-5 mb-5">
+    &copy; 2021, Teen Build Up
+  </footer>
+  </body>
+ </html>

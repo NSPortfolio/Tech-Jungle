@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+   <html>
+  <head>
+   <title>Tech Jungle</title>
+   <link rel='shortcut icon' href = "https://user-images.githubusercontent.com/76495035/124677613-77185780-de86-11eb-8bbc-982a6b64214e.png" type = "image/png">
+      {% load bootstrap4 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+  </head>
+
+  <body>
+  <header>
+  <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg {% endif %} navbar-light bg-light">
+  <a class="navbar-brand" href="/">Tech Jungle</a>
+    <form class="form-inline">
+      <a class="nav-link mr-2 ml-2 text-dark" href="/buy/">Buy</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/sell/">Sell</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/saveditems/">Saved Items</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/profile/">Profile</a>
+      <span class="mr-4">{{request.user.get_full_name|title}}</span>
+      <a href="/sign-out">Sign Out</a>
+    </form>
+</nav>
+  </header><br><br>
+            <div class="row">
+              <div class="col-lg-4" style="margin-left:50px">
+                <b class="text-secondary text-dark" style="font-size:25px">Post A Device/Electronic/Appliance</b><br><br>
+                <div class="card bg-white mt-2 mb-5">
+                    <div class="card-body">
+                        <p class="text-secondary text-dark" style="font-size:20px">Information</p>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form_errors sell_form %}
+                            <p class="text-secondary text-dark" style="font-size:18px">Email</p>
+                            <input type="text" class="form-control" placeholder={{request.user.email}} disabled><br>
+                            {% bootstrap_field sell_form.name_of_product %}
+                            {% bootstrap_field sell_form.description %}
+                            {% bootstrap_field sell_form.category %}
+                            {% bootstrap_field sell_form.condition %}
+                            {% bootstrap_label "Price (USD)" %}
+                            {% bootstrap_field sell_form.price show_label=False placeholder="Price" %}
+                            {% bootstrap_label "Pick Up or Ship" %}
+                            {% bootstrap_field sell_form.pickuporship show_label=False %}
+                            {% bootstrap_label "Pickup Area" %}
+                            {% bootstrap_field sell_form.city show_label=False placeholder="Pickup Area" %}
+                            {% bootstrap_field sell_form.photo %}
+                            <input type="hidden" name="step" value="1">
+                            <button type="submit" class="btn btn-success">Post</button>
+                        </form>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-6" style="margin-left:50px">
+                {% for myposts in myposts %}
+                 <div class="card mb-3 mr-5 ml-5">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <center><img src="{{myposts.photo.url}}" class="img-fluid rounded-start"></center>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{myposts.name_of_product}}</h5>
+                        <h5 style="font-size:15px;" class="card-text">{{myposts.category}}</h5>
+                        <p style="font-size:14px;" class="card-text">{{myposts.description}}</p>
+                        <h5 style="font-size:15px;" class="card-text">{{myposts.condition}}</h5>
+                        <p style="font-size:15px;" class="card-text">${{myposts.price}} USD</p>
+                        <p style="font-size:15px;" class="card-text">{{myposts.pickuporship}}</p>
+                        <p style="font-size:15px;" class="card-text">Pickup Area: {{myposts.city}}</p>
+                        <a class="btn btn-primary" href="{% url 'editpost' myposts.name_of_product %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'deletepost' myposts.name_of_product %}">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><br>
+              </div>
+            </div>
+            {% endfor %}
+
+  <footer class="text-center mt-5 mb-5">
+    &copy; 2021, Tech Jungle
+  </footer>
+  </body>
+ </html>

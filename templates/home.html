@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+   <html>
+  <head>
+   <title>Tech Jungle</title>
+   <link rel='shortcut icon' href = "https://user-images.githubusercontent.com/76495035/124677613-77185780-de86-11eb-8bbc-982a6b64214e.png" type = "image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+      {% load bootstrap4 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+  </head>
+  <body>
+<header>
+  <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg {% endif %} navbar-light bg-light">
+  <a class="navbar-brand" href="">Tech Jungle</a>
+  {% if not request.user.is_authenticated %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link mr-2 ml-2" href="/log-in/">Log In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mr-2 ml-2" href="/sign-up/">Sign Up</a>
+      </li>
+    </ul>
+  </div>
+    {% else %}
+    <form class="form-inline">
+      <a class="nav-link mr-2 ml-2 text-dark" href="/buy/">Buy</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/sell/">Sell</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/saveditems/">Saved Items</a>
+      <a class="nav-link mr-2 ml-2 text-dark" href="/profile/">Profile</a>
+      <span class="mr-4">{{request.user.get_full_name|title}}</span>
+      <a href="/sign-out">Sign Out</a>
+    </form>
+    {% endif %}
+</nav>
+  <div
+    class="p-5 bg-image"
+    style="
+      background-image: url('https://user-images.githubusercontent.com/76495035/124961923-aa242d80-dfe3-11eb-9ecb-aa09dc5f1ca2.PNG');
+      height: 600px;
+      background-size:cover;
+      background-repeat:no-repeat;
+    "
+  >
+    <div class="mask float-left" style="background-color: rgba(0, 0, 0, 0.5);padding:30px;">
+      <div class="d-flex justify-content-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3" style="font-size:65px">Tech Jungle</h1>
+          <h4 class="mb-3" style="font-size:35px">Save One Tree By Selling One Electronic</h4><br><br><br>
+          <a class="btn btn-outline-light btn-lg" href="#getstarted" role="button">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+  <p class="bg-success text-white text-center" id = "getstarted" style ="font-size:30px;padding:40px">Disposing Unwanted and Old Electronics Harms Our Environment</p><br>
+  <center><table style="width:90%"><tr><td>
+    <img src = "https://user-images.githubusercontent.com/76495035/124951832-557bb500-dfd9-11eb-83e6-0b1538637f48.png"></td><td>
+  <h1 style="font-size:28px;color:black">E-Waste</h1><br>
+    <p style= "font-size:18px"><i class="bi-trash" style="font-size:30px"></i>  According to the
+      <a href = "http://www3.weforum.org/docs/WEF_A_New_Circular_Vision_for_Electronics.pdf">Platform for Accelerating the Circular Economy and the UN E-Waste Coalition,</a>
+      we produce almost 50 tons of electronic waste or e-waste worth over $62.5 billion every year. </p><br>
+    <p style= "font-size:18px"><i class="bi-recycle" style="font-size:30px"></i>  Less than 20% of e-waste is formally recycled to reuse heavy metals or other components, and 80% ends up in landfills or informally recycled.</p><br>
+    <p style= "font-size:18px"><i class="bi-globe" style="font-size:30px"></i>  If our e-waste curve continues as predicted, we could find 120 tons of it being thrown out yearly by 2050.</p><br>
+    </td></tr></table></center>
+  <p class="bg-light text-black text-center" style ="font-size:30px;padding:25px"> Why is e-waste a problem?</p>
+<div class="row row-cols-1 row-cols-md-3 g-4 mr-5 ml-5">
+  <div class="col">
+    <div class="card h-100">
+      <img src="https://user-images.githubusercontent.com/76495035/124995190-980ab500-e00c-11eb-8949-0e9784df29bf.PNG" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size:28px">Our Atmosphere</h5>
+        <p class="card-text" style="font-size:18px">Electronic waste that ends up in landfills or informal recycling areas releases toxic chemicals including lead into the surrounding atmosphere. This process negatively affects both the neurological and overall health of animals and us humans.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="https://user-images.githubusercontent.com/76495035/124995013-5417b000-e00c-11eb-9346-0cee732fedbd.PNG" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size:28px">Our Rainforests</h5>
+        <p class="card-text" style="font-size:18px">Toxins like heavy metals and flame retardants that leach from e-waste contaminate soil as well. These contaminants are taken up by crops and rainforests affecting plant growth and processes. Eventually, these crops and plants reach consumer mouths, potentially causing health concerns. In particular, the mining of cobalt, one of the primary components in cell phones, in the Congo Basin increases the hunting and killing of endangered gorillas and apes. Recycling or reusing a cell phone can save a gorilla. </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="https://user-images.githubusercontent.com/76495035/124995018-55e17380-e00c-11eb-9a75-bd8604d007a2.PNG" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size:28px">Our Water</h5>
+        <p class="card-text" style="font-size:18px">Toxins can seep into groundwater or flow into rivers and streams. This results in contaminated drinking water containing potentially lead, arsenic, and mercury and toxification in water habitats and food sources. </p>
+      </div>
+    </div>
+  </div>
+</div><br><br>
+ <p class="bg-light text-black text-center" style ="font-size:30px;padding:25px"> What can we do?</p>
+  <div class="card mb-3 mr-5 ml-5" style="max-width: 1200px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://user-images.githubusercontent.com/76495035/124996096-fe440780-e00d-11eb-92a4-88b5ba015710.PNG" class="img-fluid rounded-start" height="200">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size:28px">Sell or Recycle</h5>
+        <p class="card-text" style="font-size:18px"><a href = "https://www.ewaste1.com/how-does-recycling-electronics-help-the-environment/#:~:text=Currently%2C%20only%2015%2D20%20percent,them%20in%20landfills%20and%20incinerators.">According to the Environmental Protection Agency (EPA),</a> we toss out over 416,000 cell phones and 142,000 computers. Instead of trashing unwanted and broken electronics, sell them to those who may find them valuable. </p>
+      </div>
+    </div>
+  </div>
+</div><br>
+  <div class="card mb-3 mr-5 ml-5" style="max-width: 1200px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://user-images.githubusercontent.com/76495035/124996097-fedc9e00-e00d-11eb-8369-c4fc55906338.PNG" class="img-fluid rounded-start" height="200">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size:28px">Tech Jungle</h5>
+        <p class="card-text" style="font-size:18px">At Tech Jungle, sell and buy second-hand electronics and appliances <b>while saving our atmosphere, rainforests, biodiversity, water, and us.</b></p>
+       <a class="btn btn-outline-success btn-lg" href="/sign-up" role="button">Sign Up Now</a>
+      </div>
+    </div>
+  </div>
+</div><br><br>
+ <p class="bg-light text-black text-center" style ="font-size:30px;padding:25px">How to Use TechJungle</p>
+  <div class="row">
+    <center>
+      <div class="col-md-6">
+       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="/media/slides/Buying on Techjungle.png" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="/media/slides/2.png" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="/media/slides/3.png" class="d-block w-100">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div></div><br><br>
+
+     <center>
+       <div class="col-md-6">
+          <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExample" data-slide-to="3" class="active"></li>
+              <li data-target="#carouselExample" data-slide-to="4"></li>
+              <li data-target="#carouselExample" data-slide-to="5"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/media/slides/Selling on Techjungle.png" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="/media/slides/4.png" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="/media/slides/5.png" class="d-block w-100">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+       </div>
+    </div>
+    </center>
+  <footer class="text-center mt-5 mb-5">
+    &copy; 2021, Tech Jungle
+  </footer>
+  </body>
+ </html>
