@@ -10,11 +10,11 @@ from app.models import Post
 from django.core.mail import send_mail
 
 def firstpage(request):
-    return render(request,'templates/home.html')
+    return render(request,'home.html')
 
 @login_required()
 def home(request):
-    return render(request, 'templates/home.html')
+    return render(request, 'home.html')
 
 @login_required()
 def email(request):
