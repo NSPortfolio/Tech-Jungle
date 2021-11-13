@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*kbq_lstkl5xwcecb#z!brop#sfbiq_rhf+46nj6&=^l9n13*s'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['ec2-3-90-218-39.compute-1.amazonaws.com']
 
