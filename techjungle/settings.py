@@ -13,7 +13,7 @@ SECRET_KEY = '*kbq_lstkl5xwcecb#z!brop#sfbiq_rhf+46nj6&=^l9n13*s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-3-90-218-39.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-3-90-218-39.compute-1.amazonaws.com', '3.90.218.39']
 
 
 # Application definition
