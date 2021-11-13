@@ -65,7 +65,7 @@ WSGI_APPLICATION = 'techjungle.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'seller': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Sellerdb',
         'PORT': '8000',
