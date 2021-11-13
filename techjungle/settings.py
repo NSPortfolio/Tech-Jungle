@@ -68,7 +68,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Sellerdb',
-        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
         'PORT': '8000',
         'USER': 'root',
         'PASSWORD': 'unicorn1',
@@ -76,7 +75,6 @@ DATABASES = {
     'category': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Categorydb',
-        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
         'PORT': '8000',
         'USER': 'root',
         'PASSWORD': 'unicorn1',
@@ -84,7 +82,6 @@ DATABASES = {
     'posts': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Postsdb',
-        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
         'PORT': '8000',
         'USER': 'root',
         'PASSWORD': 'unicorn1',
