@@ -13,7 +13,7 @@ SECRET_KEY = '*kbq_lstkl5xwcecb#z!brop#sfbiq_rhf+46nj6&=^l9n13*s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-3-90-218-39.compute-1.amazonaws.com']
 
 
 # Application definition
@@ -66,11 +66,30 @@ WSGI_APPLICATION = 'techjungle.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Sellerdb',
+        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
+        'PORT': '8000',
+        'USER': 'root',
+        'PASSWORD': 'unicorn1',
+    },
+    'category': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Categorydb',
+        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
+        'PORT': '8000',
+        'USER': 'root',
+        'PASSWORD': 'unicorn1',
+    },
+    'posts': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Postsdb',
+        'HOST': 'ec2-3-90-218-39.compute-1.amazonaws.com',
+        'PORT': '8000',
+        'USER': 'root',
+        'PASSWORD': 'unicorn1',
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
