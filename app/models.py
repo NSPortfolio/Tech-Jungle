@@ -10,14 +10,6 @@ class Seller(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
-
-class Category(models.Model):
-    slug = models.CharField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
 class Post(models.Model):
     NEW_CONDITION = "New Condition"
     GOOD_CONDITION = "Good Condition"
@@ -38,11 +30,46 @@ class Post(models.Model):
         (bothpickship, "Both Pick Up and Shipping"),
     )
 
+    other = "Other"
+    appliances = "Appliances"
+    keyboards = "Keyboards"
+    mice = "Mice"
+    microphones = "Microphones"
+    printer = "Printer"
+    headphonesearbuds = "Headphones/Earbuds"
+    speakers = "Speaker"
+    projectors = "Projectors"
+    storagedevices = "Storage Devices"
+    ereader = "e-readers"
+    phones = "Phones"
+    watches = "Watches"
+    tablets = "Tablets"
+    camera = "Camera"
+    computer = "Computer"
+    categories = (
+        (other, "Other")
+        (appliances , "Appliances")
+        (keyboards , "Keyboards")
+        (mice , "Mice")
+        (microphones , "Microphones")
+        (printer , "Printer")
+        (headphonesearbuds , "Headphones/Earbuds")
+        (speakers , "Speaker")
+        (projectors , "Projectors")
+        (storagedevices , "Storage Devices")
+        (ereader , "e-readers")
+        (phones , "Phones")
+        (watches , "Watches")
+        (tablets , "Tablets")
+        (camera , "Camera")
+        (computer , "Computer")
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.CharField(max_length=255, blank=True)
     name_of_product = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=False)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=False)
+    category = models.CharField(max_length=36, choices=categories, default=computer)
     condition = models.CharField(max_length=20, choices=CONDITION, default=GOOD_CONDITION)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=False)
     pickuporship = models.CharField(max_length=36, choices=pick_ship, default=pickuponly)
