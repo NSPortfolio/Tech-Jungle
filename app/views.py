@@ -32,7 +32,7 @@ def email(request):
             [tocontact],
         )
         return redirect('/buy/')
-    return render(request, 'templates/email.html')
+    return render(request, 'email.html')
 
 @login_required()
 def buy(request):
@@ -50,7 +50,7 @@ def buy(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                       'searchbutton': searchbutton}
-            return render(request, 'templates/buy.html', context)
+            return render(request, 'buy.html', context)
         else:
             ship = Post.objects.filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -59,7 +59,7 @@ def buy(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/buy.html', context)
+            return render(request, 'buy.html', context)
 
 @login_required()
 def computer(request):
@@ -77,7 +77,7 @@ def computer(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                       'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/computer.html', context)
+            return render(request, 'tabs/computer.html', context)
         else:
             ship = Post.objects.filter(category='1').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='1').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -86,7 +86,7 @@ def computer(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/computer.html', context)
+            return render(request, 'tabs/computer.html', context)
 
 @login_required()
 def camera(request):
@@ -104,7 +104,7 @@ def camera(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                       'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/camera.html', context)
+            return render(request, 'tabs/camera.html', context)
         else:
             ship = Post.objects.filter(category='2').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='2').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -113,7 +113,7 @@ def camera(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/camera.html', context)
+            return render(request, 'tabs/camera.html', context)
 
 @login_required()
 def tablet(request):
@@ -131,7 +131,7 @@ def tablet(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/tablet.html', context)
+            return render(request, 'tabs/tablet.html', context)
         else:
             ship = Post.objects.filter(category='3').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='3').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -140,7 +140,7 @@ def tablet(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/tablet.html', context)
+            return render(request, 'tabs/tablet.html', context)
 
 @login_required()
 def watch(request):
@@ -158,7 +158,7 @@ def watch(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/watch.html', context)
+            return render(request, 'tabs/watch.html', context)
         else:
             ship = Post.objects.filter(category='4').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='4').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -167,7 +167,7 @@ def watch(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/watch.html', context)
+            return render(request, 'tabs/watch.html', context)
 
 @login_required()
 def phone(request):
@@ -185,7 +185,7 @@ def phone(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/phone.html', context)
+            return render(request, 'tabs/phone.html', context)
         else:
             ship = Post.objects.filter(category='5').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='5').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -194,7 +194,7 @@ def phone(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/phone.html', context)
+            return render(request, 'tabs/phone.html', context)
 
 @login_required()
 def ereader(request):
@@ -212,7 +212,7 @@ def ereader(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/ereader.html', context)
+            return render(request, 'tabs/ereader.html', context)
         else:
             ship = Post.objects.filter(category='6').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='6').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -221,7 +221,7 @@ def ereader(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/ereader.html', context)
+            return render(request, 'tabs/ereader.html', context)
 
 @login_required()
 def storagedevice(request):
@@ -239,7 +239,7 @@ def storagedevice(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/storagedevice.html', context)
+            return render(request, 'tabs/storagedevice.html', context)
         else:
             ship = Post.objects.filter(category='7').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='7').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -248,7 +248,7 @@ def storagedevice(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/storagedevice.html', context)
+            return render(request, 'tabs/storagedevice.html', context)
 
 @login_required()
 def projector(request):
@@ -266,7 +266,7 @@ def projector(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/projector.html', context)
+            return render(request, 'tabs/projector.html', context)
         else:
             ship = Post.objects.filter(category='8').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='8').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -275,7 +275,7 @@ def projector(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/projector.html', context)
+            return render(request, 'tabs/projector.html', context)
 
 @login_required()
 def speaker(request):
@@ -293,7 +293,7 @@ def speaker(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/speaker.html', context)
+            return render(request, 'tabs/speaker.html', context)
         else:
             ship = Post.objects.filter(category='9').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='9').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -302,7 +302,7 @@ def speaker(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/speaker.html', context)
+            return render(request, 'tabs/speaker.html', context)
 
 @login_required()
 def headphoneearbud(request):
@@ -320,7 +320,7 @@ def headphoneearbud(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/headphoneearbud.html', context)
+            return render(request, 'tabs/headphoneearbud.html', context)
         else:
             ship = Post.objects.filter(category='10').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='10').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -329,7 +329,7 @@ def headphoneearbud(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/headphoneearbud.html', context)
+            return render(request, 'tabs/headphoneearbud.html', context)
 
 @login_required()
 def microphone(request):
@@ -347,7 +347,7 @@ def microphone(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/microphone.html', context)
+            return render(request, 'tabs/microphone.html', context)
         else:
             ship = Post.objects.filter(category='11').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='11').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -356,7 +356,7 @@ def microphone(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/microphone.html', context)
+            return render(request, 'tabs/microphone.html', context)
 
 @login_required()
 def printer(request):
@@ -374,7 +374,7 @@ def printer(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/printer.html', context)
+            return render(request, 'tabs/printer.html', context)
         else:
             ship = Post.objects.filter(category='12').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='12').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -383,7 +383,7 @@ def printer(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/printer.html', context)
+            return render(request, 'tabs/printer.html', context)
 
 @login_required()
 def mice(request):
@@ -410,7 +410,7 @@ def mice(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/mice.html', context)
+            return render(request, 'tabs/mice.html', context)
 
 @login_required()
 def keyboard(request):
@@ -428,7 +428,7 @@ def keyboard(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/keyboard.html', context)
+            return render(request, 'tabs/keyboard.html', context)
         else:
             ship = Post.objects.filter(category='14').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='14').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -437,7 +437,7 @@ def keyboard(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/keyboard.html', context)
+            return render(request, 'tabs/keyboard.html', context)
 
 @login_required()
 def appliances(request):
@@ -455,7 +455,7 @@ def appliances(request):
                        'pickshipsearch': pickshipsearch,
                        'pickupsearch': pickupsearch,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/appliances.html', context)
+            return render(request, 'tabs/appliances.html', context)
         else:
             ship = Post.objects.filter(category='15').filter(pickuporship="Shipping Only").order_by('-created_at')[:5]
             pickship = Post.objects.filter(category='15').filter(pickuporship="Both Pick Up and Shipping").order_by('-created_at')[:5]
@@ -464,7 +464,7 @@ def appliances(request):
                        'pickship': pickship,
                        'pickup': pickup,
                        'searchbutton': searchbutton}
-            return render(request, 'templates/tabs/appliances.html', context)
+            return render(request, 'tabs/appliances.html', context)
 
 @login_required()
 def editpost(request, name_of_product):
@@ -476,7 +476,7 @@ def editpost(request, name_of_product):
     if sell_form.is_valid():
         sell_form.save()
         return redirect('/sell/')
-    return render(request, 'templates/editpost.html', {
+    return render(request, 'editpost.html', {
         "edit": edit,
         "sell_form": sell_form,
     })
@@ -507,7 +507,7 @@ def sell(request):
                 creating_post.city = creating_post.city.replace(" ", "")
                 creating_post.save()
                 return redirect('/sell/')
-    return render(request, 'templates/sell.html', {
+    return render(request, 'sell.html', {
         "sell_form": sell_form,
         "myposts": myposts,
     })
@@ -542,7 +542,7 @@ def profile(request):
                 update_session_auth_hash(request,user)
                 messages.success(request, 'Your profile has been updated.')
                 return redirect('/profile/')
-    return render(request, 'templates/profile.html', {
+    return render(request, 'profile.html', {
         "user_form": user_form,
         "password_form": password_form,
         "pickup_form": pickup_form,
@@ -560,7 +560,7 @@ def sign_up(request):
             user.save()
             login(request, user)
             return redirect('/home/')
-    return render(request, 'templates/sign_up.html', {
+    return render(request, 'sign_up.html', {
         'form': form
     })
 
@@ -595,6 +595,6 @@ def SavedItems(request):
         return redirect('/profile/')
     user = request.user
     saved_posts = user.saved.all()
-    return render(request, 'templates/saveditems.html', {
+    return render(request, 'saveditems.html', {
         "saved_posts": saved_posts,
     })
